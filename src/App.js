@@ -11,6 +11,9 @@ export default function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [fromCurrency, setFromCurrency] = useState();
   const [toCurrency, setToCurrency] = useState();
+  const [exchangeRate, setExchangeRate] = useState();
+  const [amount, setAmount] = useState(1);
+  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
 
   useEffect(async () => {
     const resp = await axios.get(
@@ -23,6 +26,7 @@ export default function App() {
     ]);
     setFromCurrency(resp.data.base_code);
     setToCurrency(firstCurrency);
+    setExchangeRate(resp.data.conversion_rates[firstCurrency]);
   }, []);
 
   return (
